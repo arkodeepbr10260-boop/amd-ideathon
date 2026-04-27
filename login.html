@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Register - HealthBite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+        .tabs { display: flex; margin-bottom: 20px; border-bottom: 2px solid #eee; }
+        .tab { flex: 1; text-align: center; padding: 10px; cursor: pointer; font-weight: 600; color: #aaa; transition:0.2s;}
+        .tab:hover { color: var(--green); }
+        .tab.active { color: var(--green); border-bottom: 3px solid var(--green); }
+        .auth-form { display: none; }
+        .auth-form.active { display: block; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo">HealthBite</a>
+    </nav>
+
+    <div class="auth-container">
+        <h2>Welcome Back</h2>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('login')">Login</div>
+            <div class="tab" onclick="switchTab('register')">Register</div>
+        </div>
+
+        <form id="login-form" class="auth-form active" onsubmit="login(event)">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="email" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" class="form-control" required />
+            </div>
+            <button type="submit" class="btn" style="width: 100%; margin-top:10px;">Login</button>
+        </form>
+
+        <form id="register-form" class="auth-form" onsubmit="register(event)">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" id="name-reg" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="email-reg" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password-reg" class="form-control" required />
+            </div>
+            <div style="display:flex; gap:10px;">
+                <div class="form-group" style="flex:1;">
+                    <label>Age</label>
+                    <input type="number" id="age-reg" class="form-control" required min="12" max="120" />
+                </div>
+                <div class="form-group" style="flex:1;">
+                    <label>Gender</label>
+                    <select id="gender-reg" class="form-control" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group" style="flex:1;">
+                    <label>Weight (kg)</label>
+                    <input type="number" id="weight-reg" class="form-control" required min="30" max="250" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Health Goal</label>
+                <select id="goal-reg" class="form-control" required>
+                    <option value="weight_loss">Weight Loss</option>
+                    <option value="muscle_gain">Muscle Gain</option>
+                    <option value="maintenance">Maintenance</option>
+                    <option value="general_health">General Health</option>
+                </select>
+            </div>
+            <button type="submit" class="btn" style="width: 100%; margin-top:10px;">Create Account</button>
+        </form>
+    </div>
+
+    <script src="/js/auth.js"></script>
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            
+            if(tab === 'login') {
+                document.querySelectorAll('.tab')[0].classList.add('active');
+                document.getElementById('login-form').classList.add('active');
+                document.querySelector('.auth-container h2').innerText = 'Welcome Back';
+            } else {
+                document.querySelectorAll('.tab')[1].classList.add('active');
+                document.getElementById('register-form').classList.add('active');
+                document.querySelector('.auth-container h2').innerText = 'Create Account';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout - HealthBite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo">HealthBite</a>
+        <div id="nav-links" class="nav-links"></div>
+    </nav>
+
+    <div class="checkout-page">
+        <!-- Delivery & Payment -->
+        <div class="checkout-panel">
+            <h3>1. Delivery Details</h3>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="dlv-name" class="form-control" placeholder="John Doe" required />
+            </div>
+            <div class="form-group">
+                <label>Flat, House no., Building, Company, Apartment</label>
+                <input type="text" id="dlv-address" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label>Pincode</label>
+                <div style="display:flex; gap:10px;">
+                    <input type="text" id="pincode-input" class="form-control" placeholder="e.g. 560001" maxlength="6" />
+                    <button type="button" class="btn" onclick="checkPincodeETA()">Check ETA</button>
+                </div>
+                <div id="address-error" style="color:red; font-size:0.85rem; display:none; margin-top:5px;">Sorry, we currently deliver ONLY in Bengaluru (Pincodes starting with 560).</div>
+                <div id="eta-display" style="color:var(--green); font-weight:700; font-size:1.1rem; margin-top:10px;"></div>
+            </div>
+
+            <h3 style="margin-top: 40px;">2. Payment Method</h3>
+            <label class="pay-option">
+                <input type="radio" name="payment" value="upi" checked onchange="toggleCardFields()"> <span>UPI (GPay / PhonePe)</span>
+            </label>
+            <label class="pay-option">
+                <input type="radio" name="payment" value="card" onchange="toggleCardFields()"> <span>Credit / Debit Card</span>
+            </label>
+            
+            <div id="card-details" style="display:none; margin-bottom: 15px; padding: 15px; background: #fafafa; border-radius: 10px;">
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" class="form-control" placeholder="1234 5678 9876 5432" maxlength="19" />
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <div class="form-group" style="flex:1;">
+                        <label>Expiry Date</label>
+                        <input type="text" class="form-control" placeholder="MM/YY" maxlength="5" />
+                    </div>
+                    <div class="form-group" style="flex:1;">
+                        <label>CVV</label>
+                        <input type="password" class="form-control" placeholder="***" maxlength="3" />
+                    </div>
+                </div>
+            </div>
+
+            <label class="pay-option">
+                <input type="radio" name="payment" value="cod" onchange="toggleCardFields()"> <span>Cash on Delivery</span>
+            </label>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="checkout-panel" style="align-self: start;">
+            <h3>Order Summary</h3>
+            <div id="checkout-items">
+                <!-- Populated by JS -->
+            </div>
+            
+            <div style="margin-top:20px; padding-top:20px; border-top:1px solid #eee;">
+                <label style="font-size:0.9rem; font-weight:600; color:var(--dark);">Have a Promo Code?</label>
+                <div style="display:flex; gap:10px; margin-top:5px;">
+                    <input type="text" id="coupon-input" class="form-control" placeholder="e.g. FIRST50" />
+                    <button class="btn" style="background:var(--dark);" onclick="applyCoupon()">Apply</button>
+                </div>
+                <div id="coupon-msg" style="font-size:0.85rem; margin-top:5px;">Hint: Use FIRST50 for 50% off!</div>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; margin-top:20px; font-size:1.5rem; font-weight:900;">
+                <span>Total:</span>
+                <span id="total-price">₹0</span>
+            </div>
+            <button id="place-order-btn" class="btn" style="width:100%; margin-top:20px; font-size:1.2rem; padding:15px;" onclick="initiateOrder()" disabled>Place Order & Pay</button>
+        </div>
+    </div>
+
+    <!-- OTP Modal -->
+    <div id="otp-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+        <div style="background:white; padding:30px; border-radius:20px; width:300px; text-align:center; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
+            <h3 style="color:var(--green); font-family:'Playfair Display', serif;">Bank Authentication</h3>
+            <p style="font-size:0.9rem; color:#666;">Enter the 4-digit OTP sent to your registered mobile number.</p>
+            <input type="text" id="otp-input" class="form-control" style="text-align:center; font-size:1.5rem; letter-spacing:5px;" maxlength="4" placeholder="••••" />
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button class="btn" style="flex:1; background:#ccc; color:white;" onclick="document.getElementById('otp-modal').style.display='none'">Cancel</button>
+                <button class="btn" style="flex:1;" onclick="verifyOTP()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

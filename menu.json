@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Quinoa Power Bowl",
+    "price": 349,
+    "tags": ["High Protein", "Vegan"],
+    "image": "images/quinoa.webp",
+    "recommended_for": { "genders": ["all", "male", "female"], "minAge": 18, "maxAge": 100 }
+  },
+  {
+    "id": 2,
+    "name": "Avocado Chicken Wrap",
+    "price": 289,
+    "tags": ["High Protein"],
+    "image": "images/avocado_wrap.webp",
+    "recommended_for": { "genders": ["male", "female", "all"], "minAge": 18, "maxAge": 45 }
+  },
+  {
+    "id": 3,
+    "name": "Grilled Salmon Asparagus",
+    "price": 479,
+    "tags": ["Keto", "High Protein"],
+    "image": "images/salmon.webp",
+    "recommended_for": { "genders": ["male", "female", "all"], "minAge": 30, "maxAge": 65 }
+  },
+  {
+    "id": 4,
+    "name": "Dal Palak Super Bowl",
+    "price": 229,
+    "tags": ["Vegan", "High Iron"],
+    "image": "images/dal.webp",
+    "recommended_for": { "genders": ["female", "all"], "minAge": 18, "maxAge": 50 }
+  },
+  {
+    "id": 5,
+    "name": "Bone Broth Soup",
+    "price": 299,
+    "tags": ["Keto", "High Collagen"],
+    "image": "images/broth.webp",
+    "recommended_for": { "genders": ["female", "male", "all"], "minAge": 40, "maxAge": 100 }
+  },
+  {
+    "id": 6,
+    "name": "Mass Gainer Shake",
+    "price": 249,
+    "tags": ["High Calorie", "High Protein"],
+    "image": "images/shake.webp",
+    "recommended_for": { "genders": ["male"], "minAge": 16, "maxAge": 35 }
+  }
+]
